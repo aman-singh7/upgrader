@@ -10,8 +10,11 @@ class UpgradeAlert extends UpgradeBase {
   /// The [child] contained by the widget.
   final Widget? child;
 
+  /// The [card] will be shown in the dialog
+  final Widget? card;
+
   /// Creates a new [UpgradeAlert].
-  UpgradeAlert({Key? key, Upgrader? upgrader, this.child})
+  UpgradeAlert({Key? key, Upgrader? upgrader, this.child, this.card})
       : super(upgrader ?? Upgrader.sharedInstance, key: key);
 
   /// Describes the part of the user interface represented by this widget.
@@ -27,7 +30,7 @@ class UpgradeAlert extends UpgradeBase {
           if (processed.connectionState == ConnectionState.done &&
               processed.data != null &&
               processed.data!) {
-            upgrader.checkVersion(context: context);
+            upgrader.checkVersion(context: context, card: card);
           }
           return child ?? Container();
         });
